@@ -1,0 +1,21 @@
+{
+  "name": "workout-log-client",
+  "description": "front-end for workout log app",
+  "main": "index.js",
+  "authors": [
+    "cgack"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ryan-ohern/workoutlog",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "bootstrap": "^3.3.6"
+  }
+}

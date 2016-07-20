@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 // allows api to be accessed by browsers or other elements outside of port 3000
 app.use(require('./middleware/headers'));
 
-
 // create user route
 app.use('/api/user', require('./routes/user'));
 // login route

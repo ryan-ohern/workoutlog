@@ -5,13 +5,13 @@ var Definition = sequelize.import('../models/definition');
 // create a definition
 router.post('/', function(req, res){
 	// creating variables from inputted data on DOM
-	var descrption = req.body.definition.desc;
+	var description = req.body.definition.desc;
 	var logType = req.body.definition.type;
 	// because we won't have a field where they input their user id
 	// defined in validate-session.js
 	var owner = req.user.id;
 
-	Defintion
+	Definition
 		.create({
 			description: description,
 			logType: logType,
@@ -35,7 +35,7 @@ router.post('/', function(req, res){
 // fetch definitions of a given owner by user id
 router.get('/', function(req, res){
 	var owner = req.user.id; // shortify :)
-	Defintion
+	Definition
 		.findAll({
 			// find definitions where owner variable (requested user id) matches owner in db
 			where: { owner: owner }

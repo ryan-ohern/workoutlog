@@ -31,7 +31,9 @@ app.use('/api/user', require('./routes/user'));
 // login route
 app.use('/api/login', require('./routes/sessions'));
 // definitions route
-app.use('/api/defintion', require('./routes/definition'));
+app.use('/api/definition', require('./routes/definition'));
+// log route
+app.use('/api/log', require('./routes/log'));
 
 app.listen(3000, function(){
 	console.log('app is binge watching Netflix on port 3000');

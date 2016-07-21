@@ -22,7 +22,7 @@ $(function() {
 				if (data.sessionToken) {
 					// set global auth header authorization with token
 					WorkoutLog.setAuthHeader(data.sessionToken);
-					// WorkoutLog.definition.fetchAll();
+					WorkoutLog.definition.fetchAll();
 					// WorkoutLog.log.fetchAll();
 				}
 				// hide sign-up modal
@@ -56,7 +56,7 @@ $(function() {
 			login.done(function(data) {
 				if (data.sessionToken) {
 					WorkoutLog.setAuthHeader(data.sessionToken);
-					// WorkoutLog.definition.fetchAll();
+					WorkoutLog.definition.fetchAll();
 					// WorkoutLog.log.fetchAll();
 				}
 				// TODO: add logic to set user and auth token	

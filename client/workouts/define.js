@@ -54,7 +54,7 @@ $(function(){
 	// $("#def-save").on("click", WorkoutLog.definition.fetchAll);
 
 	// if page is refreshed or at login and sessionToken is valid, fetch all
-	if (window.localStoreage.getItem("sessionToken")) {
+	if (window.localStorage.getItem("sessionToken")) {
 		WorkoutLog.definition.fetchAll();
 	}
 });

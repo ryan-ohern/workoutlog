@@ -1,11 +1,11 @@
 var router = require('express').Router();
 var sequelize = require('../db');
-var Definition = require('../models/definition');
+var Definition = sequelize.import('../models/definition');
 
 // create a definition
 router.post('/', function(req, res){
 	// creating variables from inputted data on DOM
-	var descrption = req.body.definition.description;
+	var descrption = req.body.definition.desc;
 	var logType = req.body.definition.type;
 	// because we won't have a field where they input their user id
 	// defined in validate-session.js

@@ -10,20 +10,28 @@ sequelize.sync(); // sequelize.sync({ force: true }); // drops the table and rec
 
 app.use(bodyParser.json());
 
+/* /////// Test route for api http://localhost:3000/api/test ////////
+app.use('/api/test', function(req, res){
+	res.send("hello world");
+});
+*/
+
+// MIDDLEWARE //////////////////////////////////////////////////////////
+
 // allows api to be accessed by browsers or other elements outside of port 3000
 app.use(require('./middleware/headers'));
 // checks to see if token that was given matches the header of every request
 app.use(require('./middleware/validate-session'));
 
+
+// API ROUTES //////////////////////////////////////////////////////////
+
 // create user route (these are end-points for browser to access API)
 app.use('/api/user', require('./routes/user'));
 // login route
 app.use('/api/login', require('./routes/sessions'));
-
-// Test route for api http://localhost:3000/api/test
-app.use('/api/test', function(req, res){
-	res.send("hello world");
-});
+// definitions route
+app.use('/api/defintion', require('./routes/definition'));
 
 app.listen(3000, function(){
 	console.log('app is binge watching Netflix on port 3000');

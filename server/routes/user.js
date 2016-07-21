@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 
 router.post('/', function(req, res){
 
+	// values of user input are assigned to variables
 	var username = req.body.user.username;
 	var pass = req.body.user.password;
 
@@ -15,7 +16,9 @@ router.post('/', function(req, res){
 		passwordhash: bcrypt.hashSync(pass, 10)
 	}).then(
 		function createSuccess(user) {
-			var token = jwt.sign({ id: user.id }, "shh_I_am_secret", { expiresIn: 60*60*24 } );
+			// after user is created, assign a token to user
+			var token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: 60*60*24 } );
+			// respond with a json string including user's token
 			res.json({
 				user: user,
 				message: 'created',

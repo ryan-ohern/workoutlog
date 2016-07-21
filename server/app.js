@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -11,8 +12,10 @@ app.use(bodyParser.json());
 
 // allows api to be accessed by browsers or other elements outside of port 3000
 app.use(require('./middleware/headers'));
+// checks to see if token that was given matches the header of every request
+app.use(require('./middleware/validate-session'));
 
-// create user route
+// create user route (these are end-points for browser to access API)
 app.use('/api/user', require('./routes/user'));
 // login route
 app.use('/api/login', require('./routes/sessions'));

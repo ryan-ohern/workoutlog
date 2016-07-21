@@ -11,11 +11,13 @@ router.post('/', function(req, res){
 	// defined in validate-session.js
 	var owner = req.user.id;
 
-	Defintion.create({
-		description: description,
-		logType: logType,
-		owner: owner
-	}).then(
+	Defintion
+		.create({
+			description: description,
+			logType: logType,
+			owner: owner
+		})
+		.then(
 		// if successfull, we get entire definition to pass into function
 		function createSuccess(definition) {
 			res.json({
@@ -30,15 +32,24 @@ router.post('/', function(req, res){
 	);
 });
 
-// fetch definitions by user id
-router.get('/', function(){
-	Defintion.findById({ where: { id: user.id } }).then(
-		function createSuccess(user){
-			res.json({
-				user: user.definition
-			});
-		}
-	);
+// fetch definitions of a given owner by user id
+router.get('/', function(req, res){
+	var owner = req.user.id; // shortify :)
+	Defintion
+		.findAll({
+			// find definitions where owner variable (requested user id) matches owner in db
+			where: { owner: owner }
+		})
+		.then(
+			function findAllSuccess(data){
+				// send on all data from query
+				res.json(data);
+			},
+			function findAllError(err){
+				res.send(500, err.message);
+			}
+		);
+
 });
 
 module.exports = router;

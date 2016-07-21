@@ -31,6 +31,15 @@ $(function() {
 		}
 	});
 
+	// bind tab change events (shows logs, calls function "setDefinitions" in log.js)
+	$("a[data-toggle='tab']").on("shown.bs.tab", function(e){
+		// sees which tab is targeted
+		var target = $(e.target).attr("href");
+		if (target === "#log") {
+			WorkoutLog.log.setDefinitions();
+		}
+	});
+
 	// setHeader if we have a session (refresh of browser)
 	var token = window.localStorage.getItem("sessionToken");
 	if (token) {

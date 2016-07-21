@@ -11,6 +11,7 @@ $(function(){
 				// will eventually loop through and append to select options dropdown
 				var opts;
 				for (var i = 0; i < len; i++) {
+					// if (defs[i].description != opts)
 					opts += "<option value='" + defs[i].id + "'>" + defs[i].description + "</option>";
 				}
 				// adds to html after "log definition" - which is the label

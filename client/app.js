@@ -1,5 +1,7 @@
 $(function() {
+	// this is an Immediately Invoked Funtion Expression
 	var WorkoutLog = (function($, undefined) {
+		// this allows us to change root directory of our api with one line
 		var API_BASE =  "http://localhost:3000/api/";
 		var userDefinitions = [];
 
@@ -8,6 +10,7 @@ $(function() {
 			// Set the authorization header
 			// This can be done on individual calls
 			// here we showcase ajaxSetup as a global tool
+			// global header for all ajax requests
 			$.ajaxSetup({
 				"headers": {
 				"Authorization": sessionToken
@@ -38,7 +41,23 @@ $(function() {
 		if (target === "#log") {
 			WorkoutLog.log.setDefinitions();
 		}
+		if (target === "#history") {
+			WorkoutLog.log.setHistory();
+		}
 	});
+
+	// bind enter key
+	$(document).on("keypress", function(e) {
+		if (e.which === 13) { // enter key
+			if ($("#signup-modal").is(":visible")) {
+				$("#signup").trigger("click");
+			}
+			if ($("#login-modal").is(":visible")) {
+				$("#login").trigger("click");
+			}
+		}
+	});
+
 
 	// setHeader if we have a session (refresh of browser)
 	var token = window.localStorage.getItem("sessionToken");

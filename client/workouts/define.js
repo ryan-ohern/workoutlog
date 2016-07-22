@@ -22,6 +22,7 @@ $(function(){
 				});
 				define.fail(function(){
 					console.log("yea...so...that didn't work");
+					// $("#define_error").text("There was an issue with your definition").show();
 				});
 			},
 			fetchAll: function(){

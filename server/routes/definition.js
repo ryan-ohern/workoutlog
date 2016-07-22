@@ -11,6 +11,7 @@ router.post('/', function(req, res){
 	// defined in validate-session.js
 	var owner = req.user.id;
 
+	// Use definition model from db to create new definition (category)
 	Definition
 		.create({
 			description: description,

@@ -1,5 +1,15 @@
 $(function() {
 	$.extend( WorkoutLog, {
+		afterSignin: function(sessionToken) {
+			// set global auth header authorization with token
+			WorkoutLog.setAuthHeader(sessionToken);
+			WorkoutLog.definition.fetchAll();
+			WorkoutLog.log.fetchAll();
+			$(".disabled").removeClass("disabled");
+			// change text of nav bar "login" to "logout"
+			$("#loginout").text("Logout");
+		},
+
 		signup: function() {
 			// pulls info from DOM and creates variables
 			var username = $("#su_username").val();
@@ -11,25 +21,20 @@ $(function() {
 					password: password
 				}
 			};
+			
 			var signup = $.ajax({
 				type: "POST",
 				url: WorkoutLog.API_BASE + "user", 
 				data: JSON.stringify(user), 
 				contentType: "application/json"
 			});		// run this promise after signup post is done
+			
 			signup.done(function(data) {
 				// if you succesully sign up and recieve a token
 				if (data.sessionToken) {
-					// set global auth header authorization with token
-					WorkoutLog.setAuthHeader(data.sessionToken);
-					WorkoutLog.definition.fetchAll();
-					// WorkoutLog.log.fetchAll();
+					// hide sign-up modal
+					$("#signup-modal").modal("hide");
 				}
-				// hide sign-up modal
-				$("#signup-modal").modal("hide");
-				$(".disabled").removeClass("disabled");
-				// change text of nav bar "login" to "logout"
-				$("#loginout").text("Logout");
 				// go to define tab after sign up
 				$('.nav-tabs a[href="#define"]').tab('show');
 			})
@@ -55,14 +60,10 @@ $(function() {
 			});
 			login.done(function(data) {
 				if (data.sessionToken) {
-					WorkoutLog.setAuthHeader(data.sessionToken);
-					WorkoutLog.definition.fetchAll();
-					// WorkoutLog.log.fetchAll();
+					// call function (part of refactoring)
+					WorkoutLog.afterSignin(data.sessionToken);
+					$("#login-modal").modal("hide");
 				}
-				// TODO: add logic to set user and auth token	
-				$("#login-modal").modal("hide");
-				$(".disabled").removeClass("disabled");
-				$("#loginout").text("Logout");
 			})
 			.fail(function() {
 				$("#li_error").text("There was an issue with your username or password").show();

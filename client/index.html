@@ -39,6 +39,7 @@
             <!-- DEFINE -->
             <div class="tab-pane" id="define">
                 <h2>Define</h2>
+                <!-- <div class="alert alert-danger" style="display: none;" role="alert" id="define_error"></div> -->
                 <label for="def-description">Description</label>
                 <textarea class="form-control" id="def-description" rows="3"></textarea>
                 <label for="def-logtype">Log work by</label>
@@ -49,10 +50,8 @@
                 </select>
                 <button id="def-save" class="btn btn-primary">Save</button>
             </div>
-            <!--
-            Here is a lab for the class
-            get them to build the rest of the HTML
-            -->
+            
+            <!-- LOG -->
             <div class="tab-pane" id="log">
                 <h2>Log</h2>
                     <label>Result</label>
@@ -64,8 +63,12 @@
                     <textarea class="form-control" id="log-description" rows="3"></textarea>
                     <button id="log-save" class="btn btn-primary">Save</button>
             </div>
+
+            <!-- HISTORY -->
             <div class="tab-pane" id="history">
                 <h2>History</h2>
+                <ul class="list-group" id="history-list">
+                </ul>
             </div>
         </div>
 

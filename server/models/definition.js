@@ -3,11 +3,13 @@
 module.exports = function(sequelize, DataTypes) {
 
 	// definition model for new table in postgres created using sequelize
-	return sequelize.define('definition', {
+	var Definition = sequelize.define('definition', {
 		description: { type: DataTypes.STRING, unique: true },
 		logType: DataTypes.STRING,
 		owner: DataTypes.INTEGER
 	});
+
+	return Definition;
 };
 
 /*

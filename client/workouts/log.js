@@ -25,7 +25,8 @@ $(function(){
 				// will eventually loop through and append to select options dropdown
 				var lis = "";
 				for (var i = 0; i < len; i++) {
-					lis += "<li class='list-group-item'>" + history[i].def + " - " + history[i].result + "</li>";
+					lis += "<li class='list-group-item'>" + history[i].def + " - " + history[i].result + 
+					"<button id='testbutton' class='remove'>Remove Me</button></li>";
 				}
 				// removes existing labels prior to appending history
 				$("#history-list").children().remove();
@@ -58,6 +59,37 @@ $(function(){
 				});
 			},
 
+			/*delete: function(){
+				var itsLog = {
+					desc: $("#log-description").val(),
+					result: $("#log-result").val(),
+					// uses value of option selected
+					def: $("#log-definition option:selected").text()
+				};
+								// server is expecting an object called "log"
+				var deleteData = { log: itsLog };
+				var logger = $.ajax({
+					type: "DELETE",
+					url: WorkoutLog.API_BASE + "log",
+					data: JSON.stringify(deleteData),
+					contentType: "application/json"
+				});
+
+				// ensure that the response has occurred before running this code
+				logger.done(function(data){
+					$('#x').closest('li').hide();
+					// WorkoutLog.log.workouts.push(data);
+				});
+
+				logger.fail(function(){
+					console.log("nope. you didn't delete it.");
+				});
+			},*/
+
+			deleteX: function(){
+				$('#x').hide();
+			},
+
 			fetchAll: function(){
 				var fetchDefs = $.ajax({
 					type: "GET",
@@ -79,11 +111,26 @@ $(function(){
 
 	// button that makes ajax call
 	$("#log-save").on("click", WorkoutLog.log.create);
+	// $("#x").on("click", WorkoutLog.log.deleteX);
+	
 	// $("#history").on("click", WorkoutLog.log.setHistory);
 
 	// if I refresh page and I have a valid session token, fetch all logs
 	if (window.localStorage.getItem("sessionToken")) {
 		WorkoutLog.log.fetchAll();
 	}
+
+// $("#testbutton").on("click", function(){
+// 		alert("hey, it worked");
+// 		console.log("hey, it worked");
+// });
+
+	$('#history-list > li > button').click(function() {
+		$(this).parent().hide();
+		return false;
+	});
+
 });
+
+
 

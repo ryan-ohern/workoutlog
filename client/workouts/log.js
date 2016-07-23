@@ -25,7 +25,10 @@ $(function(){
 				// will eventually loop through and append to select options dropdown
 				var lis = "";
 				for (var i = 0; i < len; i++) {
-					lis += "<li class='list-group-item'>" + history[i].def + " - " + history[i].result + 
+					lis += "<li class='list-group-item'>" + 
+					history[i].id + " - " + 
+					history[i].def + " - " + 
+					history[i].result + 
 					"<button id='testbutton' class='remove'>Remove Me</button></li>";
 				}
 				// removes existing labels prior to appending history
@@ -125,9 +128,25 @@ $(function(){
 // 		console.log("hey, it worked");
 // });
 
-	$('#history-list > li > button').click(function() {
-		$(this).parent().hide();
-		return false;
+	// $( '#history-list > li > button' ).click(function() {
+	// 	$(this).parent().hide();
+	// 	return false;
+	// });
+
+	// 	$( "#history-list" ).children().hide();
+	// });
+	// WORKS
+	// $('#history-list').on('click', 'button', function () {
+ //    	$( "#history-list" ).children().hide();
+	// });
+
+	// WORKS
+	$('#history-list').on('click', 'button', function () {
+    	$( "#testbutton" ).closest('li').hide();
+	});
+	// WORKS
+	$('#history-list').on('click', 'button', function () {
+    	$( "#history-list > li > button" ).closest('li').hide();
 	});
 
 });

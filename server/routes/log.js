@@ -43,4 +43,21 @@ router.get('/', function(req, res){
 		);
 });
 
+/*router.delete('/' + user.log.id, function(req, res){
+	console.log("you hit the api");
+	// var owner = req.user.id;
+	// Log
+	// 	.findAll({
+	// 		where: { owner: owner}
+	// 	})
+	// 	.then(
+	// 		function findAllSuccess(data){
+	// 			res.json(data);
+	// 		},
+	// 		function findAllError(err){
+	// 			res.send(500, err.message);
+	// 		}
+	// 	);
+});*/
+
 module.exports = router;

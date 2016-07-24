@@ -29,7 +29,7 @@ $(function(){
 					history[i].id + " - " + 
 					history[i].def + " - " + 
 					history[i].result + 
-					"<button id='testbutton' class='remove'>Remove Me</button></li>";
+					"<button id='" + history[i].id + "' class='remove'>Remove Me</button></li>";
 				}
 				// removes existing labels prior to appending history
 				$("#history-list").children().remove();
@@ -61,36 +61,25 @@ $(function(){
 					console.log("friend. we have a problem.");
 				});
 			},
-
-			/*delete: function(){
-				var itsLog = {
-					desc: $("#log-description").val(),
-					result: $("#log-result").val(),
-					// uses value of option selected
-					def: $("#log-definition option:selected").text()
-				};
-								// server is expecting an object called "log"
-				var deleteData = { log: itsLog };
-				var logger = $.ajax({
+			
+			delete: function(){
+				var deleteLog = $.ajax({
 					type: "DELETE",
-					url: WorkoutLog.API_BASE + "log",
-					data: JSON.stringify(deleteData),
-					contentType: "application/json"
+					url: WorkoutLog.API_BASE + "log", //+ $(this).attr('id'),
+					// data: JSON.stringify(deleteData),
+					// contentType: "application/json"
+				});
+				deleteLog.done(function(data){
+					$(this).closest("li").remove();
 				});
 
-				// ensure that the response has occurred before running this code
-				logger.done(function(data){
-					$('#x').closest('li').hide();
-					// WorkoutLog.log.workouts.push(data);
-				});
-
-				logger.fail(function(){
+				deleteLog.fail(function(){
 					console.log("nope. you didn't delete it.");
 				});
-			},*/
+			},
 
-			deleteX: function(){
-				$('#x').hide();
+			deleteTest: function(){
+					$(this).closest("li").remove();
 			},
 
 			fetchAll: function(){
@@ -114,7 +103,10 @@ $(function(){
 
 	// button that makes ajax call
 	$("#log-save").on("click", WorkoutLog.log.create);
-	// $("#x").on("click", WorkoutLog.log.deleteX);
+	
+	// need to change to delete once .ajax call is finished
+	// has to target id of ul b/c li items are dynamic
+	$("#history-list").delegate('.remove', 'click', WorkoutLog.log.deleteTest);
 	
 	// $("#history").on("click", WorkoutLog.log.setHistory);
 
@@ -122,32 +114,10 @@ $(function(){
 	if (window.localStorage.getItem("sessionToken")) {
 		WorkoutLog.log.fetchAll();
 	}
-
-// $("#testbutton").on("click", function(){
-// 		alert("hey, it worked");
-// 		console.log("hey, it worked");
-// });
-
-	// $( '#history-list > li > button' ).click(function() {
-	// 	$(this).parent().hide();
-	// 	return false;
-	// });
-
-	// 	$( "#history-list" ).children().hide();
-	// });
-	// WORKS
-	// $('#history-list').on('click', 'button', function () {
- //    	$( "#history-list" ).children().hide();
-	// });
-
-	// WORKS
-	$('#history-list').on('click', 'button', function () {
-    	$( "#testbutton" ).closest('li').hide();
-	});
-	// WORKS
-	$('#history-list').on('click', 'button', function () {
-    	$( "#history-list > li > button" ).closest('li').hide();
-	});
+	// removes list item
+	/*$('#history-list').delegate('.remove', 'click', function () {
+    	$(this).closest("li").remove();
+	});*/
 
 });
 

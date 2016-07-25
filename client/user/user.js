@@ -1,19 +1,12 @@
 $(function(){
 
-// $("#welcome").hide();
-
-// calls to api to return user info
+// calls to api to return user info on reload
 var getUsername = $.ajax({
 	type: "GET",
 	url: WorkoutLog.API_BASE + "user",
 	headers: {
 	"Authorization": window.localStorage.getItem("sessionToken")
 	}
-	// success: function(data){
-	// 	userInfo = data;
-	// 	username = userInfo[0].username;
-	// 	// inputs username to dom
-	// }
 }).done(function(data){
 	console.log("you made it this far");
 	userInfo = data;
@@ -21,6 +14,5 @@ var getUsername = $.ajax({
 	// inputs username to dom
 	$("#welcome").text("Welcome, " + username);
 });
-
 
 });

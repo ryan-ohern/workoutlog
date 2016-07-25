@@ -31,4 +31,21 @@ router.post('/', function(req, res){
 	);
 });
 
+router.get('/', function(req, res){
+	var username = req.user.username;
+	User
+		.findAll({
+			where: { username: username}
+		})
+		.then(
+			function findAllSuccess(data){
+				res.json(data);
+				console.log(data);
+			},
+			function findAllError(err){
+				res.send(500, err.message);
+			}
+		);
+});
+
 module.exports = router;

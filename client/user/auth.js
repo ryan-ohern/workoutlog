@@ -63,6 +63,9 @@ $(function() {
 					// call function (part of refactoring)
 					WorkoutLog.afterSignin(data.sessionToken);
 					$("#login-modal").modal("hide");
+					$('.nav-tabs a[href="#log"]').tab('show');
+					$("#welcome").show();
+					$("#welcome").text("Welcome, " + username);
 				}
 			})
 			.fail(function() {
@@ -75,6 +78,7 @@ $(function() {
 			if (window.localStorage.getItem("sessionToken")) {
 				window.localStorage.removeItem("sessionToken");
 				$("#loginout").text("Login");
+				// $("#welcome").toggle();
 			}
 			// TODO: on logout, make sure things are disabled
 		}

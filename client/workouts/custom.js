@@ -1,17 +1,18 @@
 $(function(){
 
-// alert("yo");
+var getUsername = $.ajax({
+	type: "GET",
+	url: WorkoutLog.API_BASE + "user",
+	headers: {
+	"Authorization": window.localStorage.getItem("sessionToken")
+	}
+});
 
-
-// With the element initially shown, we can hide it slowly:
-// $( "#thisisatest" ).click(function() {
-//   $( "#thisisatest" ).hide();
-//  });
-
-
-// $('#thisisatest').clickfunction(){
-// 		$('#thisisatest').hide();
-// 		alert("hey, it worked");
-// });
+getUsername.done(function(data){
+	console.log("you made it this far");
+	userInfo = data;
+	username = userInfo[0].username;
+	$("#welcome").text(username);
+});
 
 });

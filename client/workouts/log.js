@@ -1,4 +1,13 @@
+// TODO
+// Add notes to history - maybe a button that pops up box with notes??
+// Add update feature
+// Add landing page
+// Allow for same defines between users
+
 $(function(){
+	$("#log-success").hide();
+	$("#log-fail").hide();
+
 	$.extend(WorkoutLog, {
 		// everything chained off an object called log (so we can pass all log info in one object)
 		log: {
@@ -56,10 +65,12 @@ $(function(){
 				// ensure that the response has occurred before running this code
 				logger.done(function(data){
 					WorkoutLog.log.workouts.push(data);
+					$("#log-success").fadeIn();
 				});
 
 				logger.fail(function(){
 					console.log("friend. we have a problem.");
+					$("#log-fail").fadeIn();
 				});
 			},
 			

@@ -1,4 +1,7 @@
 $(function(){
+	
+	$("#define-success").hide();
+	$("#define-fail").hide();
 	// takes WorkoutLog object and merges in another module on top of it
 	$.extend(WorkoutLog, {
 		definition: {
@@ -19,9 +22,11 @@ $(function(){
 
 				define.done(function(data){
 					WorkoutLog.definition.userDefinition.push(data.definition);
+					$("#define-success").fadeIn();
 				});
 				define.fail(function(){
 					console.log("yea...so...that didn't work");
+					$("#define-fail").fadeIn();
 					// $("#define_error").text("There was an issue with your definition").show();
 				});
 			},

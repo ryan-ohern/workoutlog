@@ -43,8 +43,25 @@ router.get('/', function(req, res){
 		);
 });
 
-/*router.delete('/' + user.log.id, function(req, res){
-	console.log("you hit the api");
+router.delete('/', function(req, res){
+	// console.log("you hit the api");
+	var data = req.body.log.id;
+	// console.log("you removed" + data);
+	Log
+		.findOne({
+			where: { id: data }
+		}).then(
+			function deleteLogSuccess(data){
+				console.log("you removed " + data.id);
+				// data.remove();
+			},
+			function deleteLogError(err){
+				console.log("error");
+				// res.send(500, err.message);
+			}
+		);
+
+	
 	// var owner = req.user.id;
 	// Log
 	// 	.findAll({
@@ -58,6 +75,6 @@ router.get('/', function(req, res){
 	// 			res.send(500, err.message);
 	// 		}
 	// 	);
-});*/
+});
 
 module.exports = router;

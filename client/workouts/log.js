@@ -63,11 +63,16 @@ $(function(){
 			},
 			
 			delete: function(){
+				var thisLog = {
+					id: $(this).attr("id")
+				};
+				var deleteData = { log: thisLog };
+
 				var deleteLog = $.ajax({
 					type: "DELETE",
-					url: WorkoutLog.API_BASE + "log", //+ $(this).attr('id'),
-					// data: JSON.stringify(deleteData),
-					// contentType: "application/json"
+					url: WorkoutLog.API_BASE + "log",
+					data: JSON.stringify(deleteData),
+					contentType: "application/json"
 				});
 				deleteLog.done(function(data){
 					$(this).closest("li").remove();
@@ -106,7 +111,7 @@ $(function(){
 	
 	// need to change to delete once .ajax call is finished
 	// has to target id of ul b/c li items are dynamic
-	$("#history-list").delegate('.remove', 'click', WorkoutLog.log.deleteTest);
+	$("#history-list").delegate('.remove', 'click', WorkoutLog.log.delete);
 	
 	// $("#history").on("click", WorkoutLog.log.setHistory);
 

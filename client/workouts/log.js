@@ -28,9 +28,9 @@ $(function(){
 					lis += "<li class='list-group-item'>" + 
 					// history[i].id + " - " + 
 					history[i].def + " - " + 
-					history[i].result + 
+					history[i].result + " " +
 					// pass the log.id into the button's id attribute // watch your quotes!
-					"<button id='" + history[i].id + "' class='remove'>Remove Me</button></li>";
+					"<button id='" + history[i].id + "' class='remove' style='color:black'><strong>X</strong></button></li>";
 				}
 				// removes existing labels prior to appending history
 				$("#history-list").children().remove();

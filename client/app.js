@@ -44,6 +44,10 @@ $(function() {
 		if (target === "#history") {
 			WorkoutLog.log.setHistory();
 		}
+		// hides Welcome User on logout
+		if (target === "#home") {
+			$("#welcome").hide();
+		}
 	});
 
 	// bind enter key

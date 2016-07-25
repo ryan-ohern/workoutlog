@@ -48,16 +48,16 @@ router.delete('/', function(req, res){
 	var data = req.body.log.id;
 	// console.log("you removed" + data);
 	Log
-		.findOne({
+		.destroy({
 			where: { id: data }
 		}).then(
 			function deleteLogSuccess(data){
-				console.log("you removed " + data.id);
+				console.log("you removed some stuff!");
 				// data.remove();
 			},
 			function deleteLogError(err){
 				console.log("error");
-				// res.send(500, err.message);
+				res.send(500, err.message);
 			}
 		);
 

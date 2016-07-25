@@ -29,6 +29,7 @@ $(function(){
 					history[i].id + " - " + 
 					history[i].def + " - " + 
 					history[i].result + 
+					// pass the log.id into the button's id attribute // watch your quotes!
 					"<button id='" + history[i].id + "' class='remove'>Remove Me</button></li>";
 				}
 				// removes existing labels prior to appending history
@@ -66,6 +67,7 @@ $(function(){
 				var thisLog = {
 					id: $(this).attr("id")
 				};
+				
 				var deleteData = { log: thisLog };
 
 				var deleteLog = $.ajax({
@@ -74,17 +76,14 @@ $(function(){
 					data: JSON.stringify(deleteData),
 					contentType: "application/json"
 				});
-				deleteLog.done(function(data){
-					$(this).closest("li").remove();
-				});
+
+				// removes list item
+				// references button then grabs closest li
+				$(this).closest("li").remove();
 
 				deleteLog.fail(function(){
 					console.log("nope. you didn't delete it.");
 				});
-			},
-
-			deleteTest: function(){
-					$(this).closest("li").remove();
 			},
 
 			fetchAll: function(){
@@ -94,7 +93,6 @@ $(function(){
 					headers: {
 						"Authorization": window.localStorage.getItem("sessionToken")
 					}
-
 				});
 				fetchDefs.done(function(data) {
 					WorkoutLog.log.workouts = data;
@@ -113,17 +111,11 @@ $(function(){
 	// has to target id of ul b/c li items are dynamic
 	$("#history-list").delegate('.remove', 'click', WorkoutLog.log.delete);
 	
-	// $("#history").on("click", WorkoutLog.log.setHistory);
 
 	// if I refresh page and I have a valid session token, fetch all logs
 	if (window.localStorage.getItem("sessionToken")) {
 		WorkoutLog.log.fetchAll();
 	}
-	// removes list item
-	/*$('#history-list').delegate('.remove', 'click', function () {
-    	$(this).closest("li").remove();
-	});*/
-
 });
 
 

@@ -44,37 +44,18 @@ router.get('/', function(req, res){
 });
 
 router.delete('/', function(req, res){
-	// console.log("you hit the api");
 	var data = req.body.log.id;
-	// console.log("you removed" + data);
 	Log
 		.destroy({
 			where: { id: data }
 		}).then(
 			function deleteLogSuccess(data){
-				console.log("you removed some stuff!");
-				// data.remove();
+				res.send("You removed a log");
 			},
 			function deleteLogError(err){
-				console.log("error");
 				res.send(500, err.message);
 			}
 		);
-
-	
-	// var owner = req.user.id;
-	// Log
-	// 	.findAll({
-	// 		where: { owner: owner}
-	// 	})
-	// 	.then(
-	// 		function findAllSuccess(data){
-	// 			res.json(data);
-	// 		},
-	// 		function findAllError(err){
-	// 			res.send(500, err.message);
-	// 		}
-	// 	);
 });
 
 module.exports = router;

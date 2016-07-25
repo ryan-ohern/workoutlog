@@ -26,7 +26,7 @@ $(function(){
 				var lis = "";
 				for (var i = 0; i < len; i++) {
 					lis += "<li class='list-group-item'>" + 
-					history[i].id + " - " + 
+					// history[i].id + " - " + 
 					history[i].def + " - " + 
 					history[i].result + 
 					// pass the log.id into the button's id attribute // watch your quotes!
@@ -67,7 +67,7 @@ $(function(){
 				var thisLog = {
 					id: $(this).attr("id")
 				};
-				
+
 				var deleteData = { log: thisLog };
 
 				var deleteLog = $.ajax({

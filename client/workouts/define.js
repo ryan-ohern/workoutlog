@@ -22,14 +22,39 @@ $(function(){
 
 				define.done(function(data){
 					WorkoutLog.definition.userDefinition.push(data.definition);
+					// show success
 					$("#define-success").fadeIn();
+					// clear inputted fields
+					$("#def-description").val("");
 				});
 				define.fail(function(){
 					console.log("yea...so...that didn't work");
 					$("#define-fail").fadeIn();
-					// $("#define_error").text("There was an issue with your definition").show();
 				});
 			},
+
+			delete: function(){
+				var thisDefId = {
+					id: $("#log-definition").find("option:selected").val()
+				};
+				// parseInt(thisDef);
+				var deleteData = { definition: thisDefId };
+				console.log(deleteData);
+				var deleteDefinition = $.ajax({
+					type: "DELETE",
+					url: WorkoutLog.API_BASE + "definition",
+					data: JSON.stringify(deleteData),
+					contentType: "application/json"
+				});
+				
+				$("select option:selected").text("");
+				$("select option:selected").hide();
+
+				deleteDefinition.fail(function(){
+					console.log("nope. you didn't delete category.");
+				});
+			},
+
 			fetchAll: function(){
 				var getDefs = $.ajax({
 					type: "GET",
@@ -58,6 +83,16 @@ $(function(){
 	// makes an ajax call based on which button you click
 	$("#def-save").on("click", WorkoutLog.definition.create);
 	// $("#def-save").on("click", WorkoutLog.definition.fetchAll);
+	$("#delete-category").on("click", WorkoutLog.definition.delete);
+	// TODO - working on deleting options
+	/*$("#delete-category").click(function(){
+		$("select option:selected").text("");
+		$("select option:selected").hide();
+	});*/
+
+	// $("#delete-category").click(function(){
+	// 	$("#log-definition").find("option:selected").hide();
+	// });
 
 	// if page is refreshed or at login and sessionToken is valid, fetch all
 	if (window.localStorage.getItem("sessionToken")) {

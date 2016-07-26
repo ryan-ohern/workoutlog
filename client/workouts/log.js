@@ -65,7 +65,11 @@ $(function(){
 				// ensure that the response has occurred before running this code
 				logger.done(function(data){
 					WorkoutLog.log.workouts.push(data);
+					// show success
 					$("#log-success").fadeIn();
+					// clear inputted fields
+					$("#log-result").val("");
+					$("#log-description").val("");
 				});
 
 				logger.fail(function(){
@@ -80,7 +84,7 @@ $(function(){
 				};
 
 				var deleteData = { log: thisLog };
-
+				console.log(deleteData);
 				var deleteLog = $.ajax({
 					type: "DELETE",
 					url: WorkoutLog.API_BASE + "log",

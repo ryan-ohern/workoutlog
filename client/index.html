@@ -50,9 +50,9 @@
                     <option>Weight</option>
                     <option>Reps</option>
                 </select>
-                <button id="def-save" class="btn btn-primary">Save</button>
                 <div id="define-success" class="success1">You added new category!</div>
                 <div id="define-fail" class="fail">Failed to add new category</div>
+                <button id="def-save" class="btn btn-primary">Save</button>
             </div>
             
             <!-- LOG -->
@@ -60,14 +60,17 @@
                 <h2>Log</h2>
                     <label>Result</label>
                     <input type="text" class="form-control" id="log-result">
-                    <label for="log-definition">Workout Select</label>
+                    <label for="log-definition">Workout Select</label> / 
+                    <a><span id="delete-category">Delete Category</span></a>
+                    <div id="test3">
                     <select class="form-control" id="log-definition">
                     </select>
+                    </div>
                     <label for="log-description">Notes</label>
                     <textarea class="form-control" id="log-description" rows="3"></textarea>
-                    <button id="log-save" class="btn btn-primary">Save</button>
                     <div id="log-success" class="success1">You logged a new workout!</div>
                     <div id="log-fail" class="fail">Failed to log workout</div>
+                    <button id="log-save" class="btn btn-primary">Save</button>
             </div>
 
             <!-- HISTORY -->

@@ -3,7 +3,7 @@
 // Add update feature
 // Add landing page
 // Allow for same defines between users
-
+var index;
 $(function(){
 	$("#log-success").hide();
 	$("#log-fail").hide();
@@ -82,7 +82,7 @@ $(function(){
 				var thisLog = {
 					id: $(this).attr("id")
 				};
-
+				console.log(thisLog.id);
 				var deleteData = { log: thisLog };
 				console.log(deleteData);
 				var deleteLog = $.ajax({
@@ -95,7 +95,11 @@ $(function(){
 				// removes list item
 				// references button then grabs closest li
 				$(this).closest("li").remove();
-
+				for(var i = 0; i < WorkoutLog.log.workouts.length; i++){
+					if(WorkoutLog.log.workouts[i].id == thisLog.id){
+						WorkoutLog.log.workouts.splice(i, 1);
+					}
+				}
 				deleteLog.fail(function(){
 					console.log("nope. you didn't delete it.");
 				});

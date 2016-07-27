@@ -5,6 +5,7 @@ $(function(){
 	// takes WorkoutLog object and merges in another module on top of it
 	$.extend(WorkoutLog, {
 		definition: {
+			// mine is singular - yours might be "userDefinitions"
 			userDefinition: [],
 			// updating the array with new additions
 			create: function(){
@@ -35,11 +36,10 @@ $(function(){
 
 			delete: function(){
 				var thisDefId = {
+					// targets select element, then traverses down to find value of option that's selected
 					id: $("#log-definition").find("option:selected").val()
 				};
-				// parseInt(thisDef);
 				var deleteData = { definition: thisDefId };
-				console.log(deleteData);
 				var deleteDefinition = $.ajax({
 					type: "DELETE",
 					url: WorkoutLog.API_BASE + "definition",
@@ -47,8 +47,16 @@ $(function(){
 					contentType: "application/json"
 				});
 				
+				// removes value and hides option
 				$("select option:selected").text("");
 				$("select option:selected").hide();
+
+				// removes option (definition) from array
+				for(var i = 0; i < WorkoutLog.definition.userDefinition.length; i++){
+					if(WorkoutLog.definition.userDefinition[i].id == thisDefId.id){
+						WorkoutLog.definition.userDefinition.splice(i, 1);
+					}
+				}
 
 				deleteDefinition.fail(function(){
 					console.log("nope. you didn't delete category.");
@@ -82,17 +90,9 @@ $(function(){
 	// bind events
 	// makes an ajax call based on which button you click
 	$("#def-save").on("click", WorkoutLog.definition.create);
-	// $("#def-save").on("click", WorkoutLog.definition.fetchAll);
+	
+	// targets id of "Delete Category" span
 	$("#delete-category").on("click", WorkoutLog.definition.delete);
-	// TODO - working on deleting options
-	/*$("#delete-category").click(function(){
-		$("select option:selected").text("");
-		$("select option:selected").hide();
-	});*/
-
-	// $("#delete-category").click(function(){
-	// 	$("#log-definition").find("option:selected").hide();
-	// });
 
 	// if page is refreshed or at login and sessionToken is valid, fetch all
 	if (window.localStorage.getItem("sessionToken")) {

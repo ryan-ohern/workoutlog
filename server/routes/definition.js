@@ -53,4 +53,20 @@ router.get('/', function(req, res){
 
 });
 
+router.delete('/', function(req, res){
+	var data2 = req.body.definition.id;
+	console.log(data2);
+	Definition
+		.destroy({
+			where: { id: data2 }
+		}).then(
+			function deleteCatSuccess(data){
+				res.send("You removed a category");
+			},
+			function deleteCatError(err){
+				res.send(500, err.message);
+			}
+		);
+});
+
 module.exports = router;

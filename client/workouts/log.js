@@ -1,4 +1,13 @@
+// TODO
+// Add notes to history - maybe a button that pops up box with notes??
+// Add update feature
+// Add landing page
+// Allow for same defines between users
+var index;
 $(function(){
+	$("#log-success").hide();
+	$("#log-fail").hide();
+
 	$.extend(WorkoutLog, {
 		// everything chained off an object called log (so we can pass all log info in one object)
 		log: {
@@ -56,20 +65,26 @@ $(function(){
 				// ensure that the response has occurred before running this code
 				logger.done(function(data){
 					WorkoutLog.log.workouts.push(data);
+					// show success
+					$("#log-success").fadeIn();
+					// clear inputted fields
+					$("#log-result").val("");
+					$("#log-description").val("");
 				});
 
 				logger.fail(function(){
 					console.log("friend. we have a problem.");
+					$("#log-fail").fadeIn();
 				});
 			},
 			
 			delete: function(){
 				var thisLog = {
+						// "this" is the button on the li
+						// .attr("id") targets the value of the id attribute of button
 					id: $(this).attr("id")
 				};
-
 				var deleteData = { log: thisLog };
-
 				var deleteLog = $.ajax({
 					type: "DELETE",
 					url: WorkoutLog.API_BASE + "log",
@@ -81,6 +96,12 @@ $(function(){
 				// references button then grabs closest li
 				$(this).closest("li").remove();
 
+				// deletes item out of workouts array
+				for(var i = 0; i < WorkoutLog.log.workouts.length; i++){
+					if(WorkoutLog.log.workouts[i].id == thisLog.id){
+						WorkoutLog.log.workouts.splice(i, 1);
+					}
+				}
 				deleteLog.fail(function(){
 					console.log("nope. you didn't delete it.");
 				});
@@ -107,11 +128,9 @@ $(function(){
 	// button that makes ajax call
 	$("#log-save").on("click", WorkoutLog.log.create);
 	
-	// need to change to delete once .ajax call is finished
 	// has to target id of ul b/c li items are dynamic
 	$("#history-list").delegate('.remove', 'click', WorkoutLog.log.delete);
 	
-
 	// if I refresh page and I have a valid session token, fetch all logs
 	if (window.localStorage.getItem("sessionToken")) {
 		WorkoutLog.log.fetchAll();

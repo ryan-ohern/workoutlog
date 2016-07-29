@@ -5,6 +5,7 @@
 // Allow for same defines between users
 var index;
 $(function(){
+	// hide success & fail messages
 	$("#log-success").hide();
 	$("#log-fail").hide();
 	$("#define-delete-success").hide();

@@ -7,6 +7,10 @@ var index;
 $(function(){
 	$("#log-success").hide();
 	$("#log-fail").hide();
+	$("#define-delete-success").hide();
+	$("#define-delete-fail").hide();
+	$("#log-delete-success").hide();
+	$("#log-delete-fail").hide();
 
 	$.extend(WorkoutLog, {
 		// everything chained off an object called log (so we can pass all log info in one object)
@@ -66,7 +70,10 @@ $(function(){
 				logger.done(function(data){
 					WorkoutLog.log.workouts.push(data);
 					// show success
-					$("#log-success").fadeIn();
+					// $("#log-success").show().delay(3000).hide();
+					$("#log-success").fadeIn("slow", function(){
+						$("#log-success").delay(3000).fadeOut();
+					});
 					// clear inputted fields
 					$("#log-result").val("");
 					$("#log-description").val("");
@@ -74,7 +81,10 @@ $(function(){
 
 				logger.fail(function(){
 					console.log("friend. we have a problem.");
-					$("#log-fail").fadeIn();
+					// $("#log-fail").show().delay(3000).hide();
+					$("#log-fail").fadeIn("slow", function(){
+						$("#log-fail").delay(3000).fadeOut();
+					});
 				});
 			},
 			

@@ -1,5 +1,5 @@
 $(function(){
-	
+	// hide success & fail messages
 	$("#define-success").hide();
 	$("#define-fail").hide();
 	// takes WorkoutLog object and merges in another module on top of it
@@ -24,13 +24,19 @@ $(function(){
 				define.done(function(data){
 					WorkoutLog.definition.userDefinition.push(data.definition);
 					// show success
-					$("#define-success").fadeIn();
+					// $("#define-success").show().delay(3000).hide();
+					$("#define-success").fadeIn("slow", function(){
+						$("#define-success").delay(3000).fadeOut();
+					});
 					// clear inputted fields
 					$("#def-description").val("");
 				});
 				define.fail(function(){
 					console.log("yea...so...that didn't work");
-					$("#define-fail").fadeIn();
+					// $("#define-fail").show().delay(3000).hide();
+					$("#define-fail").fadeIn("slow", function(){
+						$("#define-fail").delay(3000).fadeOut();
+					});
 				});
 			},
 
@@ -50,6 +56,9 @@ $(function(){
 				// removes value and hides option
 				$("select option:selected").text("");
 				$("select option:selected").hide();
+				$("#define-delete-success").fadeIn("slow", function(){
+					$("#define-delete-success").delay(3000).fadeOut();
+				});
 
 				// removes option (definition) from array
 				for(var i = 0; i < WorkoutLog.definition.userDefinition.length; i++){
@@ -60,6 +69,9 @@ $(function(){
 
 				deleteDefinition.fail(function(){
 					console.log("nope. you didn't delete category.");
+					$("#define-delete-fail").fadeIn("slow", function(){
+						$("#define-delete-fail").delay(3000).fadeOut();
+					});
 				});
 			},
 

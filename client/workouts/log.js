@@ -106,6 +106,9 @@ $(function(){
 				// removes list item
 				// references button then grabs closest li
 				$(this).closest("li").remove();
+				$("#log-delete-success").fadeIn("slow", function(){
+						$("#log-delete-success").delay(3000).fadeOut();
+					});
 
 				// deletes item out of workouts array
 				for(var i = 0; i < WorkoutLog.log.workouts.length; i++){
@@ -115,6 +118,9 @@ $(function(){
 				}
 				deleteLog.fail(function(){
 					console.log("nope. you didn't delete it.");
+					$("#log-delete-fail").fadeIn("slow", function(){
+						$("#log-delete-fail").delay(3000).fadeOut();
+					});
 				});
 			},
 

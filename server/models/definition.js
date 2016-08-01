@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
 
 	// definition model for new table in postgres created using sequelize
 	var Definition = sequelize.define('definition', {
-		description: { type: DataTypes.STRING, unique: true },
+		// description: { type: DataTypes.STRING, unique: true },
+		description: DataTypes.STRING,
 		logType: DataTypes.STRING,
 		owner: DataTypes.INTEGER
 	});

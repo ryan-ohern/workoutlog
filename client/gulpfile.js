@@ -7,7 +7,8 @@ var javascriptFiles = [
 	'./app.js',
 	'./workouts/define.js',
 	'./workouts/log.js',
-	'./user/auth.js'
+	'./user/auth.js',
+	'./user/user.js'
 ];
 
 // bundle all js files together
